@@ -4,7 +4,7 @@
 
 import discord 
 import random
-import os
+from decouple import config
 import json
 import requests
 
@@ -55,14 +55,11 @@ async def on_message(message):
 					lions territory? Denzel."]
 			await message.channel.send(random.choice(jokes))
 
-		elif user_message.lower() == "$inspire":
-			quote = get_quote()
-			await message.channel.send(quote)
-
-		
+		elif "happy birthday" in user_message.lower():
+			await message.channel.send("happy birthday")
 
 		elif any(word in user_message.lower() for word in sad_words) :
 			await message.channel.send(random.choice(encouragement))
 		
 
-client.run(os.getenv('TOKEN'))
+client.run(config('TOKEN'))
